@@ -1,5 +1,6 @@
 plugins {
     id 'application'
+    id 'java'
 }
 
 repositories {
@@ -16,4 +17,19 @@ application {
 tasks.register('prepareDocs', Copy) {
     from('src/main/resources/website')
     into("$rootDir/docs")
+}
+dependencies {
+    implementation 'org.seleniumhq.selenium:selenium-java:4.31.0'
+    testImplementation 'org.testng:testng:7.11.0'
+}
+
+test {
+    useTestNG()
+}
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.example.Main'
+        )
+    }
 }
